@@ -196,13 +196,13 @@ function getCarInfoById(inventory, id) {
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
 function sortCarInventory(sortingCars) {
-  sortingCars.sort(function(i1, i2) {
-    if (i1.car_model > i2.car_model) {
+  sortingCars.sort((x, y) => {
+    if (x.car_model > y.car_model){
       return 1;
-    } else if (i1.car_model < i2.car_model) {
-      return -1;
-    } else {
+    } else if (x.car_model === y.car_model) {
       return 0;
+    } else {
+      return -1;
     }
   })
   return sortingCars;
@@ -311,10 +311,15 @@ const argTimesTwo = (num) => {
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(distance, drive) {
-  const odometer = 0;
-  odometer = odometer + distance + drive;
-  return carMaker;
+function carMaker(odo) {
+  const speed = { 
+    odometer: odo,
+    drive: function(distance) {
+      let newodo = distance + this.odometer;
+      return this.odometer = newodo;
+    }
+  };
+  return speed;
 }
 
 
